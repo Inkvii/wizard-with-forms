@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react"
-import { ContextData } from "../components/typescript/ContextData"
+import { useState } from "react"
+import { ContextData, StepOneRequest, StepTwoRequest } from "../components/typescript/ContextData"
 import WizardControls from "../components/wizard/WizardControls"
-import { Wizard } from "react-use-wizard"
+import { useWizard, Wizard } from "react-use-wizard"
 import StepOne from "../components/wizard/StepOne"
 import StepTwo from "../components/wizard/StepTwo"
 import LastStep from "../components/wizard/LastStep"
 
 export default function HomePage() {
   const [data, setData] = useState<ContextData>({
+    id: 1,
     address: {
       city: "",
       street: "",
@@ -16,24 +17,53 @@ export default function HomePage() {
     firstName: "s",
   })
 
-  useEffect(() => {
-    console.log("Data has changed", data)
-  }, [data])
+  function handleStepOnePostAction(context: ContextData) {
+    const request: StepOneRequest = {
+      firstName: context.firstName,
+      lastName: context.lastName,
+    }
+
+    console.log(request) //mock api call
+  }
+
+  function handleStepTwoPostAction(context: ContextData) {
+    const request: StepTwoRequest = {
+      address: context.address,
+      id: context.id,
+    }
+
+    console.log(request) //mock api call
+  }
 
   return (
-    <div className={"w-1/2 m-auto mt-8"}>
-      <Wizard footer={<WizardControls />}>
-        <StepOne data={data} setData={(data: ContextData) => {
-          setData(data)
-          console.info(data)
-        }} />
-        <StepTwo data={data} setData={(data: ContextData) => {
-          setData(data)
-          console.info(data)
-        }}/>
+    <div className={"m-auto mt-8 w-1/2"}>
+      <h1 className={"text-xl"}>Wizard example</h1>
+      <Wizard footer={<WizardControls />} header={<WizardHeader />}>
+        <StepOne
+          data={data}
+          setData={(updatedData: ContextData) => {
+            setData(updatedData)
+            handleStepOnePostAction(updatedData)
+          }}
+        />
+        <StepTwo
+          data={data}
+          setData={(updatedData: ContextData) => {
+            setData(updatedData)
+            handleStepTwoPostAction(updatedData)
+          }}
+        />
         <LastStep data={data} />
       </Wizard>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
+  )
+}
+
+function WizardHeader() {
+  const { stepCount, activeStep } = useWizard()
+  return (
+    <p className={"text-center"}>
+      {activeStep + 1} / {stepCount}
+    </p>
   )
 }

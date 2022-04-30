@@ -31,7 +31,7 @@ export default function StepOne(props: { data: ContextData; setData: (data: Cont
 
   return (
     <div className={"flex flex-col space-y-2"}>
-      <p>Step 1 - {isValid}</p>
+      <h2 className={"text-lg"}>Step 1</h2>
       <Controller
         control={control}
         name={"firstName"}
