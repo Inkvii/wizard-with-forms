@@ -44,6 +44,8 @@ export default function StepOne(props: { data: ContextData; setData: (data: Cont
         rules={{ required: { value: true, message: "required fn" }, minLength: { value: 2, message: "min 2" } }}
         render={({ field, fieldState }) => <Input {...field} label={"Last name"} error={fieldState.error?.message} />}
       />
+      <hr />
+      <Input label={"Test disabled"} value={"disabled"} disabled={true} />
 
       <pre>{JSON.stringify(errors.firstName?.message, null, 2)}</pre>
       <pre>{JSON.stringify(errors.lastName?.message, null, 2)}</pre>
