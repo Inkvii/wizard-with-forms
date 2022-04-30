@@ -1,16 +1,15 @@
-import { SubmitHandler, useForm, Controller } from "react-hook-form"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { ContextData } from "../typescript/ContextData"
 import { useWizard } from "react-use-wizard"
-import {produce} from "immer"
+import { produce } from "immer"
 import { Input } from "../Input"
 
-export default function StepOne(props: {data: ContextData, setData: (data: ContextData) => void}) {
+export default function StepOne(props: { data: ContextData; setData: (data: ContextData) => void }) {
   const {
-    register,
     handleSubmit,
     control,
     formState: { isValid, errors },
-  } = useForm<ContextData>({ mode: "all", shouldFocusError: true })
+  } = useForm<ContextData>({ mode: "all", shouldFocusError: true, defaultValues: props.data })
   const { handleStep } = useWizard()
 
   const onSubmit: SubmitHandler<ContextData> = async (data) => {
@@ -36,16 +35,14 @@ export default function StepOne(props: {data: ContextData, setData: (data: Conte
       <Controller
         control={control}
         name={"firstName"}
-        defaultValue={props.data.firstName}
         rules={{ required: { value: true, message: "required fn" }, minLength: { value: 2, message: "min 2" } }}
-        render={({ field, fieldState }) => <Input {...field} label={`First name - ${fieldState.error?.message}`} />}
+        render={({ field, fieldState }) => <Input {...field} label={"First name"} error={fieldState.error?.message} />}
       />
       <Controller
         control={control}
         name={"lastName"}
-        defaultValue={props.data.lastName}
         rules={{ required: { value: true, message: "required fn" }, minLength: { value: 2, message: "min 2" } }}
-        render={({ field }) => <Input {...field} label={"Last name"} />}
+        render={({ field, fieldState }) => <Input {...field} label={"Last name"} error={fieldState.error?.message} />}
       />
 
       <pre>{JSON.stringify(errors.firstName?.message, null, 2)}</pre>
