@@ -1,4 +1,5 @@
 import { useWizard } from "react-use-wizard"
+import { Button } from "../Button"
 
 export default function WizardControls() {
   const { nextStep, previousStep, isFirstStep, isLastStep } = useWizard()
@@ -9,16 +10,12 @@ export default function WizardControls() {
 
   return (
     <div className={"flex space-x-2"}>
-      <button
-        disabled={isFirstStep}
-        className={"w-full bg-blue-700 px-4 py-2 text-white transition-all disabled:bg-gray-500"}
-        onClick={previousStep}
-      >
+      <Button disabled={isFirstStep} type={"outline"} onClick={previousStep}>
         Previous
-      </button>
-      <button
+      </Button>
+      <Button
         disabled={isLastStep}
-        className={"w-full bg-green-700 px-4 py-2 text-white transition-all disabled:bg-gray-500"}
+        type={"primary"}
         onClick={async () => {
           try {
             await nextStep()
@@ -28,7 +25,7 @@ export default function WizardControls() {
         }}
       >
         Next
-      </button>
+      </Button>
     </div>
   )
 }

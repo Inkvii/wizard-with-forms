@@ -1,10 +1,10 @@
-import { forwardRef } from "react"
+import { ChangeEventHandler, FocusEventHandler, forwardRef } from "react"
 import clsx from "clsx"
 
 interface Props {
   label: string
-  onChange?: (e: any) => void
-  onBlur?: (e: any) => void
+  onChange?: ChangeEventHandler<HTMLInputElement> | undefined
+  onBlur?: FocusEventHandler<HTMLInputElement> | undefined
   value: string
   error?: string
   className?: string
