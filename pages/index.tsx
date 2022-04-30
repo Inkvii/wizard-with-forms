@@ -38,23 +38,25 @@ export default function HomePage() {
   return (
     <div className={"m-auto mt-8 w-1/2"}>
       <h1 className={"text-xl"}>Wizard example</h1>
-      <Wizard footer={<WizardControls />} header={<WizardHeader />}>
-        <StepOne
-          data={data}
-          setData={(updatedData: ContextData) => {
-            setData(updatedData)
-            handleStepOnePostAction(updatedData)
-          }}
-        />
-        <StepTwo
-          data={data}
-          setData={(updatedData: ContextData) => {
-            setData(updatedData)
-            handleStepTwoPostAction(updatedData)
-          }}
-        />
-        <LastStep data={data} />
-      </Wizard>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <Wizard footer={<WizardControls />} header={<WizardHeader />}>
+          <StepOne
+            data={data}
+            setData={(updatedData: ContextData) => {
+              setData(updatedData)
+              handleStepOnePostAction(updatedData)
+            }}
+          />
+          <StepTwo
+            data={data}
+            setData={(updatedData: ContextData) => {
+              setData(updatedData)
+              handleStepTwoPostAction(updatedData)
+            }}
+          />
+          <LastStep data={data} />
+        </Wizard>
+      </form>
     </div>
   )
 }

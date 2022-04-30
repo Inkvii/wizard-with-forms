@@ -10,12 +10,13 @@ export default function WizardControls() {
 
   return (
     <div className={"flex space-x-2"}>
-      <Button disabled={isFirstStep} type={"outline"} onClick={previousStep}>
+      <Button disabled={isFirstStep} variant={"outline"} onClick={previousStep}>
         Previous
       </Button>
       <Button
+        type={"submit"}
         disabled={isLastStep}
-        type={"primary"}
+        variant={"primary"}
         onClick={async () => {
           try {
             await nextStep()
