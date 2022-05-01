@@ -1,4 +1,4 @@
-import { ContextData } from "../typescript/ContextData"
+import {ContextData} from "components/typescript/ContextData"
 
 export default function LastStep(props: { data: ContextData }) {
   return (

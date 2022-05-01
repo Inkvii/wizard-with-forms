@@ -1,16 +1,16 @@
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { ContextData } from "../typescript/ContextData"
-import { useWizard } from "react-use-wizard"
-import { produce } from "immer"
-import { Input } from "../Input"
+import {Controller, SubmitHandler, useForm} from "react-hook-form"
+import {ContextData} from "components/typescript/ContextData"
+import {useWizard} from "react-use-wizard"
+import {produce} from "immer"
+import {Input} from "components/Input"
 
 export default function StepOne(props: { data: ContextData; setData: (data: ContextData) => void }) {
   const {
     handleSubmit,
     control,
-    formState: { isValid, errors },
-  } = useForm<ContextData>({ mode: "all", shouldFocusError: true, defaultValues: props.data })
-  const { handleStep } = useWizard()
+    formState: {isValid, errors},
+  } = useForm<ContextData>({mode: "all", shouldFocusError: true, defaultValues: props.data})
+  const {handleStep} = useWizard()
 
   const onSubmit: SubmitHandler<ContextData> = async (data) => {
     props.setData(

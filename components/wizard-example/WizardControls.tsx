@@ -1,8 +1,8 @@
-import { useWizard } from "react-use-wizard"
-import { Button } from "../Button"
+import {useWizard} from "react-use-wizard"
+import {Button} from "components/Button"
 
 export default function WizardControls() {
-  const { nextStep, previousStep, isFirstStep, isLastStep } = useWizard()
+  const {nextStep, previousStep, isFirstStep, isLastStep} = useWizard()
 
   if (isLastStep) {
     return null
